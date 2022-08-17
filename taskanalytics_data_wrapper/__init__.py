@@ -1,1 +1,1 @@
-from taskanalytics.taskanalytics_api import *
+from taskanalytics_data_wrapper.taskanalytics_api import *

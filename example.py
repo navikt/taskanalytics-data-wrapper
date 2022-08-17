@@ -1,7 +1,11 @@
 # %%
 import os
 
-from taskanalytics_data_wrapper import log_in_taskanalytics, get_survey_metadata, download_survey
+from taskanalytics_data_wrapper import (
+    log_in_taskanalytics,
+    get_survey_metadata,
+    download_survey,
+)
 
 # %%
 email = os.environ["ta_email"]

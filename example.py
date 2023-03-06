@@ -1,21 +1,28 @@
 # %%
 import os
+import csv
+
+from dotenv import load_dotenv
 
 from taskanalytics_data_wrapper import (
     log_in_taskanalytics,
     get_survey_metadata,
     download_survey,
+    download_discovery_survey,
 )
 
 # %%
-email = os.environ["ta_email"]
-password = os.environ["ta_password"]
+load_dotenv()
+
+email = os.getenv("ta_email")
+password = os.getenv("ta_password")
+organization = os.getenv("ta_organization")
 # %%
 status = log_in_taskanalytics(username=email, password=password)
 status.status_code
 # %%
 get_survey = download_survey(
-    username=email, password=password, survey_id="03324", filename="data/survey.csv"
+    username=email, password=password, survey_id="03348", filename="data/survey.csv"
 )
 get_survey.status_code
 # %%
@@ -25,3 +32,58 @@ survey_metadata = get_survey_metadata(
 survey_metadata.status_code
 # %%
 survey_metadata.text  # survey metadata
+# %%
+get_openended_survey = download_discovery_survey(
+    username=email, password=password, organization_id=organization, survey_id="03230"
+)
+# %%
+data = get_openended_survey.json()
+# transform dict to json file and save
+import json
+
+with open("data/open_survey.json", "w") as fp:
+    json.dump(data, fp, ensure_ascii=False)
+
+# %%
+# create a new dict from our subset of data
+def flatten_openended_dict(data):
+    """ """
+    respondent = []
+    completion = []
+    category = []
+    discovery = []
+    comment = []
+    for i in data:
+        respondent.append(i["id"])
+        completion.append(i["completion"])
+        category.append(i["category"])
+        discovery.append(i["answers"]["discovery"])
+        try:
+            comment.append(i["answers"]["comment"])
+        except:
+            comment.append("")
+    newlist = [
+        {
+            "id": respondent,
+            "completion": completion,
+            "category": category,
+            "discovery": discovery,
+            "comment": comment,
+        }
+        for respondent, completion, category, discovery, comment in zip(
+            respondent, completion, category, discovery, comment
+        )
+    ]
+    return newlist
+
+
+newlist = flatten_openended_dict(data["responses"])
+
+# %%
+# write open ended survey to csv with your preferred encoding and delimiter
+keys = newlist[0].keys()
+
+with open("data/open_survey.csv", "w", encoding="utf-8-sig", newline="") as output_file:
+    writer = csv.DictWriter(output_file, fieldnames=keys, delimiter=";")
+    writer.writeheader()
+    writer.writerows(newlist)

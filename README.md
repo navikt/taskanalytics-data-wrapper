@@ -11,6 +11,7 @@ This is a wrapper for Task Analytics APIs. You can use it to download survey res
     - [Log in to Task Analytics](#log-in-to-task-analytics)
     - [Download Survey responses](#download-survey-responses)
     - [Download Survey metadata](#download-survey-metadata)
+    - [Download Discovery survey responses](#download-discovery-survey-responses)
 
 ### Log in to Task Analytics
 
@@ -49,3 +50,64 @@ The object can be easily inspected transformed into a dictionary for analysis
 survey_metadata.text # survey metadata
 our_dict = survey_metadata.json() # convert string to dict and store as a variable
 ```
+
+### Download Discovery survey responses
+
+You can download responses from open ended task discovery surveys as well
+
+```python
+get_openended_survey = download_discovery_survey(
+    username=email, password=password, organization_id=organization, survey_id="03230"
+)
+```
+See how to turn this into csv in the code example below by expanding
+
+<details>
+<summary>Expandable example</summary>
+
+```python
+data = get_openended_survey.json()
+
+#create a new dict from our subset of data
+def flatten_openended_dict(data):
+    """ """
+    respondent = []
+    completion = []
+    category = []
+    discovery = []
+    comment = []
+    for i in data:
+        respondent.append(i["id"])
+        completion.append(i["completion"])
+        category.append(i["category"])
+        discovery.append(i["answers"]["discovery"])
+        try:
+            comment.append(i["answers"]["comment"])
+        except:
+            comment.append("")
+    newlist = [
+        {
+            "id": respondent,
+            "completion": completion,
+            "category": category,
+            "discovery": discovery,
+            "comment": comment,
+        }
+        for respondent, completion, category, discovery, comment in zip(
+            respondent, completion, category, discovery, comment
+        )
+    ]
+    return newlist
+
+
+newlist = flatten_openended_dict(data["responses"])
+
+# write open ended survey to csv with your preferred encoding and delimiter
+keys = newlist[0].keys()
+
+with open("data/open_survey.csv", "w", encoding="utf-8-sig", newline="") as output_file:
+    writer = csv.DictWriter(output_file, fieldnames=keys, delimiter=";")
+    writer.writeheader()
+    writer.writerows(newlist)
+```
+</details>

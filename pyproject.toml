@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "taskanalytics-data-wrapper"
-version = "0.1.0"
+version = "0.1.1"
 description = "a wrapper for using Task Analytics APIs and downloading survey responses"
 authors = ["Tobias McVey <tobias.mcvey@nav.no>"]
 license = "MIT"
@@ -21,6 +21,10 @@ ipykernel = "^6.15.1"
 black = "^22.6.0"
 twine = "^4.0.1"
 keyring = "^23.8.2"
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.21.1"
+python-dotenv = "^1.0.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

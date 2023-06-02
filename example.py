@@ -4,12 +4,7 @@ import csv
 
 from dotenv import load_dotenv
 
-from taskanalytics_data_wrapper import (
-    log_in_taskanalytics,
-    get_survey_metadata,
-    download_survey,
-    download_discovery_survey,
-)
+import taskanalytics_data_wrapper.taskanalytics_api as task
 
 # %%
 load_dotenv()
@@ -18,22 +13,22 @@ email = os.getenv("ta_email")
 password = os.getenv("ta_password")
 organization = os.getenv("ta_organization")
 # %%
-status = log_in_taskanalytics(username=email, password=password)
+status = task.log_in_taskanalytics(username=email, password=password)
 status.status_code
 # %%
-get_survey = download_survey(
+get_survey = task.download_survey(
     username=email, password=password, survey_id="03348", filename="data/survey.csv"
 )
 get_survey.status_code
 # %%
-survey_metadata = get_survey_metadata(
+survey_metadata = task.get_survey_metadata(
     username=email, password=password, survey_id="03324"
 )
 survey_metadata.status_code
 # %%
 survey_metadata.text  # survey metadata
 # %%
-get_openended_survey = download_discovery_survey(
+get_openended_survey = task.download_discovery_survey(
     username=email, password=password, organization_id=organization, survey_id="03230"
 )
 # %%

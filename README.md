@@ -27,7 +27,9 @@ status.status_code
 You can download survey responses for a Top Task survey using the survey ID, email, password and setting a path for where to store the file.
 
 ```python
-get_survey = download_survey(
+import taskanalytics_data_wrapper.taskanalytics_api as task
+
+get_survey = task.download_survey(
     username=email, password=password, survey_id="03324", filename="data/survey.csv"
 )
 get_survey.status_code
@@ -38,7 +40,7 @@ get_survey.status_code
 You can download the survey metadata which includes the questions and response options for each survey using the survey ID, email and password.
 
 ```python
-survey_metadata = get_survey_metadata(
+survey_metadata = task.get_survey_metadata(
     username=email, password=password, survey_id="03324"
 )
 survey_metadata.status_code
@@ -56,7 +58,7 @@ our_dict = survey_metadata.json() # convert string to dict and store as a variab
 You can download responses from open ended task discovery surveys as well
 
 ```python
-get_openended_survey = download_discovery_survey(
+get_openended_survey = task.download_discovery_survey(
     username=email, password=password, organization_id=organization, survey_id="03230"
 )
 ```

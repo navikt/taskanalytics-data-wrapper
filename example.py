@@ -4,7 +4,7 @@ import csv
 
 from dotenv import load_dotenv
 
-import taskanalytics_data_wrapper.taskanalytics_api as task
+import src.taskanalytics_data_wrapper.taskanalytics_api as task
 
 # %%
 load_dotenv()
@@ -82,3 +82,5 @@ with open("data/open_survey.csv", "w", encoding="utf-8-sig", newline="") as outp
     writer = csv.DictWriter(output_file, fieldnames=keys, delimiter=";")
     writer.writeheader()
     writer.writerows(newlist)
+
+# %%

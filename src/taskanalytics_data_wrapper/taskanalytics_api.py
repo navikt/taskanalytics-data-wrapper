@@ -3,6 +3,7 @@ import json
 import requests
 from tqdm.auto import tqdm
 
+
 # %%
 def log_in_taskanalytics(username: str, password: str):
     """

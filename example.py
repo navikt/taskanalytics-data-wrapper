@@ -39,6 +39,7 @@ import json
 with open("data/open_survey.json", "w") as fp:
     json.dump(data, fp, ensure_ascii=False)
 
+
 # %%
 # create a new dict from our subset of data
 def flatten_openended_dict(data):

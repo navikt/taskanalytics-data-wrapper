@@ -1,5 +1,5 @@
 .DS_Store
-venv*
+.venv*
 __pycache__/
 taskanalytics_data_wrapper.egg-info/
 dist/

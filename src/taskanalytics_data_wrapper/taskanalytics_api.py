@@ -1,5 +1,6 @@
 # %%
 import json
+
 import requests
 from tqdm.auto import tqdm
 
@@ -16,7 +17,10 @@ def log_in_taskanalytics(username: str, password: str):
     )
     content_type = "application/json"
     user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/75.0.3770.90 Chrome/75.0.3770.90 Safari/537.36"
-    headers = {"Content-Type": content_type, "user-agent": user_agent}
+    headers: dict[str, str | bytes] = {
+        "Content-Type": content_type,
+        "user-agent": user_agent,
+    }
     session.headers = headers
     try:
         response = session.post(login_url, data=auth)
@@ -38,7 +42,10 @@ def get_survey_metadata(username: str, password: str, survey_id: str):
     )
     content_type = "application/json"
     user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/75.0.3770.90 Chrome/75.0.3770.90 Safari/537.36"
-    headers = {"Content-Type": content_type, "user-agent": user_agent}
+    headers: dict[str, str | bytes] = {
+        "Content-Type": content_type,
+        "user-agent": user_agent,
+    }
     session.headers = headers
     try:
         response = session.post(login_url, data=auth)
@@ -60,7 +67,7 @@ def get_survey_metadata(username: str, password: str, survey_id: str):
 
 
 # %%
-def download_survey(username: str, password: str, survey_id, filename):
+def download_survey(username: str, password: str, survey_id: str, filename_path: str):
     """
     Download a Top Task survey from Task Analytics
     """
@@ -71,7 +78,7 @@ def download_survey(username: str, password: str, survey_id, filename):
     )
     content_type = "application/json"
     user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/75.0.3770.90 Chrome/75.0.3770.90 Safari/537.36"
-    headers = {
+    headers: dict[str, str | bytes] = {
         "Content-Type": content_type,
         "user-agent": user_agent,
         "Accept": "text/csv",
@@ -91,11 +98,11 @@ def download_survey(username: str, password: str, survey_id, filename):
         )
         response.raise_for_status()
         with tqdm.wrapattr(
-            open(filename, "wb"),
+            open(filename_path, "wb"),
             "write",
             miniters=1,
             total=int(data.headers.get("content-length", 0)),
-            desc=filename,
+            desc=filename_path,
         ) as fout:
             print(data.headers)
             for chunk in data.iter_content(chunk_size=8192):
@@ -107,7 +114,9 @@ def download_survey(username: str, password: str, survey_id, filename):
 
 
 # %%
-def download_discovery_survey(username: str, password: str, organization_id, survey_id):
+def download_discovery_survey(
+    username: str, password: str, organization_id: str, survey_id: str
+):
     """
     Download a discovery survey from Task analytics
     """
@@ -118,7 +127,7 @@ def download_discovery_survey(username: str, password: str, organization_id, sur
     )
     content_type = "application/json"
     user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/75.0.3770.90 Chrome/75.0.3770.90 Safari/537.36"
-    headers = {
+    headers: dict[str, str | bytes] = {
         "Content-Type": content_type,
         "user-agent": user_agent,
         "Accept": "text/csv",

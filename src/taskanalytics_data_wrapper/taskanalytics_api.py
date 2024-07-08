@@ -115,7 +115,11 @@ def download_survey(username: str, password: str, survey_id: str, filename_path:
 
 # %%
 def download_discovery_survey(
-    username: str, password: str, organization_id: str, survey_id: str
+    username: str,
+    password: str,
+    organization_id: str,
+    survey_id: str,
+    filename_path: str,
 ):
     """
     Download a discovery survey from Task analytics
@@ -149,6 +153,16 @@ def download_discovery_survey(
             },
         )
         response.raise_for_status()
+        with tqdm.wrapattr(
+            open(filename_path, "wb"),
+            "write",
+            miniters=1,
+            total=int(data.headers.get("content-length", 0)),
+            desc=filename_path,
+        ) as fout:
+            print(data.headers)
+            for chunk in data.iter_content(chunk_size=8192):
+                fout.write(chunk)
     except requests.exceptions.HTTPError as err:
         raise SystemExit(err)
     print(f"Downloaded survey {survey_id}")

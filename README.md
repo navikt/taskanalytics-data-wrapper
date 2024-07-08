@@ -59,7 +59,11 @@ You can download responses from open ended task discovery surveys as well
 
 ```python
 get_openended_survey = task.download_discovery_survey(
-    username=email, password=password, organization_id=organization, survey_id="03230"
+    username=email,
+    password=password,
+    organization_id=organization,
+    survey_id="03230",
+    filename_path="data/open_ended_survey.json",
 )
 ```
 See how to turn this into csv in the code example below by expanding

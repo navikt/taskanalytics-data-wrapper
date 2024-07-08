@@ -1,8 +1,16 @@
 # %%
 import json
+import logging
 
 import requests
 from tqdm.auto import tqdm
+
+logging.getLogger(__name__)
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
 
 
 # %%
@@ -62,7 +70,7 @@ def get_survey_metadata(username: str, password: str, survey_id: str):
         response.raise_for_status()
     except requests.exceptions.HTTPError as err:
         raise SystemExit(err)
-    print(f"Downloaded survey {survey_id}")
+    logging.info("Downloaded metadata for survey %s", survey_id)
     return data
 
 
@@ -104,12 +112,12 @@ def download_survey(username: str, password: str, survey_id: str, filename_path:
             total=int(data.headers.get("content-length", 0)),
             desc=filename_path,
         ) as fout:
-            print(data.headers)
+            logging.info(data.headers)
             for chunk in data.iter_content(chunk_size=8192):
                 fout.write(chunk)
     except requests.exceptions.HTTPError as err:
         raise SystemExit(err)
-    print(f"Downloaded survey {survey_id}")
+    logging.info("Downloaded survey %s", survey_id)
     return data
 
 
@@ -160,10 +168,10 @@ def download_discovery_survey(
             total=int(data.headers.get("content-length", 0)),
             desc=filename_path,
         ) as fout:
-            print(data.headers)
+            logging.info(data.headers)
             for chunk in data.iter_content(chunk_size=8192):
                 fout.write(chunk)
     except requests.exceptions.HTTPError as err:
         raise SystemExit(err)
-    print(f"Downloaded survey {survey_id}")
+    logging.info("Downloaded survey %s", survey_id)
     return data

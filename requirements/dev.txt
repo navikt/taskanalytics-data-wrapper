@@ -44,6 +44,8 @@ ipykernel==6.29.5
     # via taskanalytics-data-wrapper (pyproject.toml)
 ipython==8.26.0
     # via ipykernel
+isort==5.13.2
+    # via taskanalytics-data-wrapper (pyproject.toml)
 jaraco-classes==3.4.0
     # via keyring
 jaraco-context==5.3.0
@@ -74,8 +76,12 @@ more-itertools==10.3.0
     # via
     #   jaraco-classes
     #   jaraco-functools
+mypy==1.10.1
+    # via taskanalytics-data-wrapper (pyproject.toml)
 mypy-extensions==1.0.0
-    # via black
+    # via
+    #   black
+    #   mypy
 nest-asyncio==1.6.0
     # via ipykernel
 nh3==0.2.18
@@ -147,6 +153,7 @@ tomli==2.0.1
     # via
     #   black
     #   build
+    #   mypy
     #   pip-tools
 tornado==6.4.1
     # via
@@ -168,6 +175,7 @@ typing-extensions==4.12.2
     # via
     #   black
     #   ipython
+    #   mypy
 urllib3==2.2.2
     # via
     #   requests

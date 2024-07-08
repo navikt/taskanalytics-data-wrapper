@@ -17,7 +17,10 @@ status = task.log_in_taskanalytics(username=email, password=password)
 status.status_code
 # %%
 get_survey = task.download_survey(
-    username=email, password=password, survey_id="03348", filename="data/survey.csv"
+    username=email,
+    password=password,
+    survey_id="03348",
+    filename_path="data/survey.csv",
 )
 get_survey.status_code
 # %%
@@ -29,7 +32,11 @@ survey_metadata.status_code
 survey_metadata.text  # survey metadata
 # %%
 get_openended_survey = task.download_discovery_survey(
-    username=email, password=password, organization_id=organization, survey_id="03230"
+    username=email,
+    password=password,
+    organization_id=organization,
+    survey_id="03230",
+    filename_path="data/open_ended_survey.json",
 )
 # %%
 data = get_openended_survey.json()

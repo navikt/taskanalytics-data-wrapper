@@ -1,6 +1,6 @@
 [project]
 name = "taskanalytics-data-wrapper"
-version = "0.1.8"
+version = "0.1.9"
 description = "a wrapper for using Task Analytics APIs and downloading survey responses"
 authors = [
     {name = "Tobias McVey", email = "tobias.mcvey@nav.no"},
@@ -22,7 +22,9 @@ dev = [
     "black",
     "twine",
     "keyring",
-    "pip-tools"
+    "pip-tools",
+    "isort",
+    "mypy"
 ]
 
 [project.urls]
@@ -38,3 +40,11 @@ exclude = ["tests", "testing"]
 [build-system]
 requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[tool.isort]
+profile = "black"
+src_paths=["src/taskanalytics_data_wrapper"]
+sections=["FUTURE","STDLIB","THIRDPARTY","FIRSTPARTY","LOCALFOLDER"]

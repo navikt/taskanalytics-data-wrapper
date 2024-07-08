@@ -23,7 +23,7 @@ update: update-deps init
 
 build:
 	source $(VENV); \
-	rm -rf dist/ \
+	rm -rf dist/; \
 	$(PYTHON) -m build
 
 pypi_publish:

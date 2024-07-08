@@ -1,6 +1,6 @@
 [project]
 name = "taskanalytics-data-wrapper"
-version = "0.1.7"
+version = "0.1.8"
 description = "a wrapper for using Task Analytics APIs and downloading survey responses"
 authors = [
     {name = "Tobias McVey", email = "tobias.mcvey@nav.no"},

@@ -14,7 +14,7 @@ logging.basicConfig(
 
 
 # %%
-def log_in_taskanalytics(username: str, password: str):
+def log_in_taskanalytics(username: str, password: str) -> requests.Response:
     """
     Log into Task Analytics
     """
@@ -39,7 +39,9 @@ def log_in_taskanalytics(username: str, password: str):
 
 
 # %%
-def get_survey_metadata(username: str, password: str, survey_id: str):
+def get_survey_metadata(
+    username: str, password: str, survey_id: str
+) -> requests.Response:
     """
     Get survey metadata
     """
@@ -75,7 +77,9 @@ def get_survey_metadata(username: str, password: str, survey_id: str):
 
 
 # %%
-def download_survey(username: str, password: str, survey_id: str, filename_path: str):
+def download_survey(
+    username: str, password: str, survey_id: str, filename_path: str
+) -> requests.Response:
     """
     Download a Top Task survey from Task Analytics
     """
@@ -128,7 +132,7 @@ def download_discovery_survey(
     organization_id: str,
     survey_id: str,
     filename_path: str,
-):
+) -> requests.Response:
     """
     Download a discovery survey from Task analytics
     """

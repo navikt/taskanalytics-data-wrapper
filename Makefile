@@ -40,5 +40,5 @@ format:
 	black --exclude ^/.venv/ .
 
 mypy:
-	# source $(VENV); \
+	source $(VENV); \
 	mypy src

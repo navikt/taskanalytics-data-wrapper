@@ -116,7 +116,6 @@ def download_survey(
             total=int(data.headers.get("content-length", 0)),
             desc=filename_path,
         ) as fout:
-            logging.info(data.headers)
             for chunk in data.iter_content(chunk_size=8192):
                 fout.write(chunk)
     except requests.exceptions.HTTPError as err:
@@ -172,7 +171,6 @@ def download_discovery_survey(
             total=int(data.headers.get("content-length", 0)),
             desc=filename_path,
         ) as fout:
-            logging.info(data.headers)
             for chunk in data.iter_content(chunk_size=8192):
                 fout.write(chunk)
     except requests.exceptions.HTTPError as err:

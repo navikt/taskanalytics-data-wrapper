@@ -4,6 +4,18 @@
 
 This is a wrapper for Task Analytics APIs. You can use it to download survey responses and metadata for each survey.
 
+Install with
+
+```bash
+pip install taskanalytics-data-wrapper
+```
+
+or 
+
+```bash
+uv add taskanalytics-data-wrapper
+```
+
 ## Supported APIs
 
 - [Task Analytics Data Wrapper](#task-analytics-data-wrapper)
@@ -14,6 +26,10 @@ This is a wrapper for Task Analytics APIs. You can use it to download survey res
     - [Download Discovery survey responses](#download-discovery-survey-responses)
 
 ### Log in to Task Analytics
+
+```python
+import taskanalytics_data_wrapper.taskanalytics_api as task
+```
 
 You can log in with email and password
 

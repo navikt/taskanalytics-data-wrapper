@@ -1,6 +1,7 @@
 # %%
 import os
 import csv
+import json
 
 from dotenv import load_dotenv
 
@@ -41,7 +42,6 @@ get_openended_survey = task.download_discovery_survey(
 # %%
 data = get_openended_survey.json()
 # transform dict to json file and save
-import json
 
 with open("data/open_survey.json", "w") as fp:
     json.dump(data, fp, ensure_ascii=False)
@@ -63,7 +63,7 @@ def flatten_openended_dict(data):
         discovery.append(i["answers"]["discovery"])
         try:
             comment.append(i["answers"]["comment"])
-        except:
+        except Exception:
             comment.append("")
     newlist = [
         {

@@ -1,6 +1,6 @@
 # Task Analytics Data Wrapper
 
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
 This is a wrapper for Task Analytics APIs. You can use it to download survey responses and metadata for each survey.
 

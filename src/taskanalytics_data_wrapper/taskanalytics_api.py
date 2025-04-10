@@ -40,7 +40,7 @@ def log_in_taskanalytics(username: str, password: str) -> requests.Response:
 
 # %%
 def get_survey_metadata(
-    username: str, password: str, survey_id: str
+    username: str, password: str, survey_id: str, filename_path: str
 ) -> requests.Response:
     """
     Get survey metadata
@@ -72,6 +72,15 @@ def get_survey_metadata(
             headers={"Authorization": "JWT " + obj["access_token"]},
         )
         response.raise_for_status()
+        with tqdm.wrapattr(
+            open(filename_path, "wb"),
+            "write",
+            miniters=1,
+            total=int(data.headers.get("content-length", 0)),
+            desc=filename_path,
+        ) as fout:
+            for chunk in data.iter_content(chunk_size=8192):
+                fout.write(chunk)
     except requests.exceptions.HTTPError as err:
         raise SystemExit(err)
     logging.info("Downloaded metadata for survey %s", survey_id)

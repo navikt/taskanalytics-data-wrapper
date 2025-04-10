@@ -44,6 +44,8 @@ def get_survey_metadata(
 ) -> requests.Response:
     """
     Get survey metadata
+
+    TODO return the data as a json file with option to specify filepath
     """
     session = requests.Session()
     login_url = "https://api-admin.taskanalytics.com/api/v3/auth/login"

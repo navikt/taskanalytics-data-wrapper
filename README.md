@@ -57,7 +57,10 @@ You can download the survey metadata which includes the questions and response o
 
 ```python
 survey_metadata = task.get_survey_metadata(
-    username=email, password=password, survey_id="03324"
+    username=email,
+    password=password,
+    survey_id="03419",
+    filename_path="data/metadata_survey.json",
 )
 survey_metadata.status_code
 ```

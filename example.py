@@ -95,3 +95,14 @@ with open("data/open_survey.csv", "w", encoding="utf-8-sig", newline="") as outp
     writer.writerows(newlist)
 
 # %%
+
+# Get all organization settings including surveys from task analytics
+get_organization = task.get_organization_metadata(
+    username=email,
+    password=password,
+    organization_id=organization,
+    filename_path="data/organization.json",
+)
+get_organization.status_code
+# %%
+get_organization.json()  # read response as json

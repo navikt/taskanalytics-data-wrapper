@@ -24,6 +24,7 @@ uv add taskanalytics-data-wrapper
     - [Download Survey responses](#download-survey-responses)
     - [Download Survey metadata](#download-survey-metadata)
     - [Download Discovery survey responses](#download-discovery-survey-responses)
+    - [Download organization metadata](#download-organization-metadata)
 
 ### Log in to Task Analytics
 
@@ -136,3 +137,21 @@ with open("data/open_survey.csv", "w", encoding="utf-8-sig", newline="") as outp
     writer.writerows(newlist)
 ```
 </details>
+
+### Download organization metadata
+
+Get all the organization account metadata including the list of all survey IDs
+
+```python
+# Get all organization settings including surveys from task analytics
+get_organization = task.get_organization_metadata(
+    username=email,
+    password=password,
+    organization_id=organization,
+    filename_path="data/organization.json",
+)
+get_organization.status_code 
+
+# %%
+get_organization.json()  # read response as json
+```

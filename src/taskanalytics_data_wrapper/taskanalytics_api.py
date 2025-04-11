@@ -197,8 +197,6 @@ def get_organization_metadata(
     """
     Download metadata for the organization account, including the surveys object
     """
-    # get
-    # https://api-admin.taskanalytics.com/api/v3/organisations/***REMOVED***
     session = requests.Session()
     login_url = "https://api-admin.taskanalytics.com/api/v3/auth/login"
     auth = json.dumps(

@@ -32,6 +32,6 @@ jobs:
 
       - name: Build
         run: uv build
-        
+
       - name: Publish
         run: uv publish

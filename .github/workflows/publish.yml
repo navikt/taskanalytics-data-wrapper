@@ -28,7 +28,7 @@ jobs:
           cache-dependency-glob: uv.lock
 
       - name: Install Python
-        run: uv python install 3.13
+        run: uv python install 3.10
 
       - name: Build
         run: uv build
